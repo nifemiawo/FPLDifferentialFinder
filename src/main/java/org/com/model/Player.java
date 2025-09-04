@@ -1,4 +1,5 @@
 package org.com.model;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -50,10 +51,9 @@ public class Player {
     private int elementType;
 
 
-
     public Player(int id, String firstName, String secondName, String webName, int team, int nowCost, double form,
-            double pointsPerGame, int totalPoints, double selectedByPercent, String status, int minutes, int starts,
-            String birthDate, int elementType) {
+                  double pointsPerGame, int totalPoints, double selectedByPercent, String status, int minutes, int starts,
+                  String birthDate, int elementType) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -174,6 +174,7 @@ public class Player {
     public int getStarts() {
         return starts;
     }
+
     public void setStarts(int starts) {
         this.starts = starts;
     }

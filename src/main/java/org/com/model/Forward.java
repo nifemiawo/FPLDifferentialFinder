@@ -1,10 +1,10 @@
 package org.com.model;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Forward extends Player {
-
     @JsonProperty("goals_scored")
     private int goalsScored;
 
@@ -33,10 +33,10 @@ public class Forward extends Player {
     private int bps;
 
     public Forward(int id, String firstName, String secondName, String webName, int team, int nowCost, double form,
-            double pointsPerGame, int totalPoints, double selectedByPercent, String status, int minutes, int starts,
-            String birthDate, int elementType, int goalsScored, int assists, double expectedGoals,
-            double expectedAssists, double expectedGoalInvolvements, double threat, double ictIndex, int bonus,
-            int bps) {
+                   double pointsPerGame, int totalPoints, double selectedByPercent, String status, int minutes, int starts,
+                   String birthDate, int elementType, int goalsScored, int assists, double expectedGoals,
+                   double expectedAssists, double expectedGoalInvolvements, double threat, double ictIndex, int bonus,
+                   int bps) {
         super(id, firstName, secondName, webName, team, nowCost, form, pointsPerGame, totalPoints,
                 selectedByPercent, status, minutes, starts, birthDate, elementType);
         this.goalsScored = goalsScored;
@@ -89,6 +89,7 @@ public class Forward extends Player {
     public double getExpectedGoalInvolvements() {
         return expectedGoalInvolvements;
     }
+
     public void setExpectedGoalInvolvements(double expectedGoalInvolvements) {
         this.expectedGoalInvolvements = expectedGoalInvolvements;
     }
@@ -124,7 +125,5 @@ public class Forward extends Player {
     public void setBps(int bps) {
         this.bps = bps;
     }
-
-
 
 }

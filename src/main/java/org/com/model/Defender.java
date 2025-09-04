@@ -1,10 +1,8 @@
 package org.com.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class Midfielder extends Player {
+public class Defender extends Player {
 
     @JsonProperty("goals_scored")
     private int goalsScored;
@@ -27,6 +25,9 @@ public class Midfielder extends Player {
     @JsonProperty("creativity")
     private double creativity;
 
+    @JsonProperty("expected_goals_conceded")
+    private double expectedGoalsConceded;
+
     @JsonProperty("ict_index")
     private double ictIndex;
 
@@ -39,14 +40,11 @@ public class Midfielder extends Player {
     @JsonProperty("defensive_contribution")
     private double defensiveContribution;
 
+    public Defender(
+            int goalsScored, int assists, int cleanSheets, double expectedGoals, double expectedAssists,
+            double expectedGoalInvolvements, double creativity, double expectedGoalsConceded,
+            double ictIndex, int bonus, int bps, double defensiveContribution) {
 
-    public Midfielder(int id, String firstName, String secondName, String webName, int team, int nowCost, double form,
-                      double pointsPerGame, int totalPoints, double selectedByPercent, String status, int minutes, int starts,
-                      String birthDate, int elementType, int goalsScored, int assists, int cleanSheets, double expectedGoals,
-                      double expectedAssists, double expectedGoalInvolvements, double creativity, double ictIndex, int bonus,
-                      int bps, double defensiveContribution) {
-        super(id, firstName, secondName, webName, team, nowCost, form, pointsPerGame, totalPoints,
-                selectedByPercent, status, minutes, starts, birthDate, elementType);
         this.goalsScored = goalsScored;
         this.assists = assists;
         this.cleanSheets = cleanSheets;
@@ -54,13 +52,15 @@ public class Midfielder extends Player {
         this.expectedAssists = expectedAssists;
         this.expectedGoalInvolvements = expectedGoalInvolvements;
         this.creativity = creativity;
+        this.expectedGoalsConceded = expectedGoalsConceded;
         this.ictIndex = ictIndex;
         this.bonus = bonus;
         this.bps = bps;
         this.defensiveContribution = defensiveContribution;
     }
 
-    public Midfielder() {
+
+    public Defender() {
         super();
     }
 
@@ -120,6 +120,14 @@ public class Midfielder extends Player {
         this.creativity = creativity;
     }
 
+    public double getExpectedGoalsConceded() {
+        return expectedGoalsConceded;
+    }
+
+    public void setExpectedGoalsConceded(double expectedGoalsConceded) {
+        this.expectedGoalsConceded = expectedGoalsConceded;
+    }
+
     public double getIctIndex() {
         return ictIndex;
     }
@@ -153,4 +161,3 @@ public class Midfielder extends Player {
     }
 
 }
-
