@@ -1,10 +1,10 @@
 package org.com.service.impl;
 
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.com.model.*;
 import org.com.service.interfaces.FplApiService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -17,6 +17,7 @@ import java.util.List;
 public class FplApiServiceImpl implements FplApiService {
 
     private static final String FPL_API_URL = "https://fantasy.premierleague.com/api/bootstrap-static/";
+    private static final String FPL_TEAM_URL = "https://fantasy.premierleague.com/api/entry/%d/event/%d/picks/";
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
     private static final Logger logger = org.slf4j.LoggerFactory.getLogger(FplApiServiceImpl.class);
@@ -75,6 +76,31 @@ public class FplApiServiceImpl implements FplApiService {
             logger.error("Error fetching players from FPL API", e);
             return new ArrayList<>();
         }
+    }
+
+    @Override
+    public List<Player> getUserTeam(int id) {
+        try {
+            int currentEvent = objectMapper.readTree(restTemplate.getForObject(FPL_API_URL, String.class))
+                    .get("current_event").asInt();
+            String url = String.format(FPL_TEAM_URL, id, currentEvent);
+            String response = restTemplate.getForObject(url, String.class);
+
+            List<Player> team = new ArrayList<>();
+            JsonNode picks = objectMapper.readTree(response).get("picks");
+            for (JsonNode pick : picks) {
+                int playerId  = pick.get("element").asInt();
+                Player p = new Player();
+                p.setId(playerId);
+                team.add(p);
+            }
+            return team;
+
+        } catch (Exception e){
+            logger.error("Error fetching user team from FPL API", e);
+            return new ArrayList<>();
+        }
+
     }
 
 
